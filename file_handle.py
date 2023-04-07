@@ -6,7 +6,7 @@ player_progress = []
 
 def create_save_file():
     with open('progress.joke', 'w') as file:
-        for i in range(0, 408):
+        for i in range(0, len(jokes)):
             file.write("Locked\n")
 
 
