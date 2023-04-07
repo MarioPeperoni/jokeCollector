@@ -33,24 +33,30 @@ def format_colored_text(text, fr=None, bg=None):
     return color_code + text + Style.RESET_ALL
 
 
+def unlock_joke(index):
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Joke #" + str(index) + " unlocked!\n" + show_joke(index))
+    file_handle.player_progress[index] = "Unlocked"
+    file_handle.save_save_file()
+    input(format_colored_text("Click to run another task...", "BLACK", "LIGHTWHITE_EX"))
+
+
 def program():
     run_loop = True
     while run_loop:
         os.system('cls' if os.name == 'nt' else 'clear')
         randomize_index()
-        print("#" + str(current_joke_index) + "\n" + show_joke(current_joke_index))
-        print(pick_task())
+        print(pick_task() + "\n")
 
-        print(Back.LIGHTWHITE_EX + Fore.BLACK + "C" + Style.RESET_ALL + " - show collection")
-        print(Back.LIGHTWHITE_EX + Fore.BLACK + "N" + Style.RESET_ALL + " - do not unlock")
-        user_input = input(Back.LIGHTWHITE_EX + Fore.BLACK + "Enter" + Style.RESET_ALL + " - unlock and go next")
+        print(format_colored_text("C", "BLACK", "LIGHTWHITE_EX") + " - show collection")
+        print(format_colored_text("N", "BLACK", "LIGHTWHITE_EX") + " - did not complete task")
+        user_input = input(format_colored_text("Enter", "BLACK", "LIGHTWHITE_EX") + " - Task complete\n")
         if user_input.upper() == "C":
             collection_screen.show_collection(0)
         if user_input.upper() == "N":
             file_handle.player_progress[current_joke_index] = "Locked"
-        else:
-            file_handle.player_progress[current_joke_index] = "Unlocked"
-            file_handle.save_save_file()
+        if user_input.upper() == "":
+            unlock_joke(current_joke_index)
 
 
 if __name__ == "__main__":
