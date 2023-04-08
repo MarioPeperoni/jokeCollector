@@ -24,6 +24,20 @@ def pick_task():
     return "Matura " + year + extra + " Task " + task
 
 
+def pick_task_new():
+    for i in range(1, len(file_handle.task_rows)):
+        random_range = str(file_handle.task_rows[i]).split(" !").pop().split("-")
+        random_ors = str(file_handle.task_rows[i]).split("|")
+        # If there is random range
+        if len(random_range) == 2 and str(file_handle.task_rows[i]).find("!") >= 1:
+            print("".join(str(file_handle.task_rows[i]).split(" !")[:1]) + ": "
+                  + str(random.randint(int(random_range[0]), int(random_range[1]))))
+        # If there is or argument
+        else:
+            print(random_ors[random.randint(0, len(random_ors) - 1)])
+    print()
+
+
 def format_colored_text(text, fr=None, bg=None):
     color_code = ''
     if bg:
@@ -46,7 +60,7 @@ def program():
     while run_loop:
         os.system('cls' if os.name == 'nt' else 'clear')
         randomize_index()
-        print(pick_task() + "\n")
+        pick_task_new()
 
         print(format_colored_text("C", "BLACK", "LIGHTWHITE_EX") + " - show collection")
         print(format_colored_text("N", "BLACK", "LIGHTWHITE_EX") + " - did not complete task")

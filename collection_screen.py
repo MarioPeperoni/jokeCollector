@@ -1,6 +1,6 @@
 import os
 
-import main
+import jokeCollectorMain
 import file_handle
 
 
@@ -8,16 +8,16 @@ def show_collection(cursor):
     os.system('cls' if os.name == 'nt' else 'clear')
     print("#" + str(cursor + 1))
     if file_handle.player_progress[cursor] == "Unlocked":
-        print(main.show_joke(cursor))
+        print(jokeCollectorMain.show_joke(cursor))
     else:
         print("??????? ???? ?????? ?? ???????? ??? ???????\n"
               "??????? ??? ??????? ???? ?????? ???? ??????\n"
               "??????????? ?????? ?????? ???????? ????????\n"
               "?? ???????? ??? ???????? ??? ???????? ?????\n")
     print("Unlocked " + str(file_handle.player_progress.count("Unlocked")) + " of " + str(len(file_handle.jokes)))
-    print(main.format_colored_text("L", "BLACK", "LIGHTWHITE_EX") + " - for list view")
-    print(main.format_colored_text("A-D", "BLACK", "LIGHTWHITE_EX") + " - for navigation")
-    user_input = input("<< " + main.format_colored_text(str(cursor + 1), "BLACK", "LIGHTWHITE_EX") + " >>")
+    print(jokeCollectorMain.format_colored_text("L", "BLACK", "LIGHTWHITE_EX") + " - for list view")
+    print(jokeCollectorMain.format_colored_text("A-D", "BLACK", "LIGHTWHITE_EX") + " - for navigation")
+    user_input = input("<< " + jokeCollectorMain.format_colored_text(str(cursor + 1), "BLACK", "LIGHTWHITE_EX") + " >>")
     if user_input.lower() == 'd':
         if (cursor + 1) >= 408:
             cursor = -1
@@ -69,7 +69,7 @@ def collection_list_view(page):
         if page_entry >= 20:
             break
     print("Unlocked " + str(file_handle.player_progress.count("Unlocked")) + " of " + str(len(file_handle.jokes)))
-    user_input = input("⌃⌃ " + main.format_colored_text("PAGE: " + str(page + 1), "BLACK", "LIGHTWHITE_EX") + " ⌄⌄")
+    user_input = input("⌃⌃ " + jokeCollectorMain.format_colored_text("PAGE: " + str(page + 1), "BLACK", "LIGHTWHITE_EX") + " ⌄⌄")
     if user_input.lower() == "w" and page > 1:
         collection_list_view(page - 1)
     if user_input.lower() == "s" and page < (len(file_handle.jokes)/20) - 2:
