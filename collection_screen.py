@@ -15,20 +15,20 @@ def show_collection(cursor):
               "??????????? ?????? ?????? ???????? ????????\n"
               "?? ???????? ??? ???????? ??? ???????? ?????\n")
     print("Unlocked " + str(file_handle.player_progress.count("Unlocked")) + " of " + str(len(file_handle.jokes)))
-    print(jokeCollectorMain.format_colored_text("L", "BLACK", "LIGHTWHITE_EX") + " - for list view")
-    print(jokeCollectorMain.format_colored_text("A-D", "BLACK", "LIGHTWHITE_EX") + " - for navigation")
-    user_input = input("<< " + jokeCollectorMain.format_colored_text(str(cursor + 1), "BLACK", "LIGHTWHITE_EX") + " >>")
-    if user_input.lower() == 'd':
+    print(jokeCollectorMain.format_colored_text("L") + " - for list view")
+    print(jokeCollectorMain.format_colored_text("A-D") + " - for navigation")
+    user_input = input("<< " + jokeCollectorMain.format_colored_text(str(cursor + 1)) + " >>")
+    if user_input.upper() == 'D':
         if (cursor + 1) >= 408:
             cursor = -1
         show_collection(cursor + 1)
-    if user_input.lower() == 'a':
+    if user_input.upper() == 'A':
         if (cursor - 1) < 0:
             cursor = 408
         show_collection(cursor - 1)
-    if user_input.lower() == 'l':
+    if user_input.upper() == 'L':
         collection_list_view(0)
-    if user_input.lower() == 'b':
+    if user_input.upper() == 'B':
         return None
     if user_input.isdigit():
         show_collection(int(user_input) - 1)
@@ -70,7 +70,9 @@ def collection_list_view(page):
             break
     print("Unlocked " + str(file_handle.player_progress.count("Unlocked")) + " of " + str(len(file_handle.jokes)))
     user_input = input("⌃⌃ " + jokeCollectorMain.format_colored_text("PAGE: " + str(page + 1), "BLACK", "LIGHTWHITE_EX") + " ⌄⌄")
-    if user_input.lower() == "w" and page > 1:
+    if user_input.upper() == "W" and page > 1:
         collection_list_view(page - 1)
-    if user_input.lower() == "s" and page < (len(file_handle.jokes)/20) - 2:
+    if user_input.upper() == "S" and page < (len(file_handle.jokes)/20) - 2:
         collection_list_view(page + 1)
+    if user_input.isdigit():
+        show_collection(int(user_input) - 1)

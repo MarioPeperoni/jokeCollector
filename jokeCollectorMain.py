@@ -39,7 +39,7 @@ def pick_task():
     print()
 
 
-def format_colored_text(text, fr=None, bg=None):
+def format_colored_text(text, fr="BLACK", bg="LIGHTWHITE_EX"):
     color_code = ''
     if bg:
         color_code += getattr(Back, bg.upper())
@@ -51,11 +51,11 @@ def format_colored_text(text, fr=None, bg=None):
 def unlock_joke(index):
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Joke #" + str(index) + " unlocked!\n" + show_joke(index))
-    file_handle.player_progress[index] = "Unlocked"
+    file_handle.player_progress[index - 1] = "Unlocked"
     file_handle.tasks_done += 1
     file_handle.tasks_done_current += 1
     file_handle.save_save_file()
-    input(format_colored_text("Click to run another task...", "BLACK", "LIGHTWHITE_EX"))
+    input(format_colored_text("Click to run another task..."))
 
 
 def program():
@@ -64,10 +64,11 @@ def program():
         os.system('cls' if os.name == 'nt' else 'clear')
         randomize_index()
         pick_task()
-
-        print(format_colored_text("C", "BLACK", "LIGHTWHITE_EX") + " - show collection")
-        print(format_colored_text("N", "BLACK", "LIGHTWHITE_EX") + " - did not complete task")
-        user_input = input(format_colored_text("Enter", "BLACK", "LIGHTWHITE_EX") + " - Task complete\n")
+        print("Tasks completed this session: " + format_colored_text(str(file_handle.tasks_done_current)))
+        print("Total tasks completed: " + format_colored_text(str(file_handle.tasks_done)))
+        print(format_colored_text("C") + " - show collection")
+        print(format_colored_text("N") + " - did not complete task")
+        user_input = input(format_colored_text("Enter") + " - Task complete\n")
         if user_input.upper() == "C":
             collection_screen.show_collection(0)
         if user_input.upper() == "N":

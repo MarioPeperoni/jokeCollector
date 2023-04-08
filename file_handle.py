@@ -71,8 +71,7 @@ def load_tasks():
         create_template_tasks()
         input(jokeCollectorMain.format_colored_text("The task file could not be located in the directory. "
                                                     "A template file will be generated. "
-                                                    "Please press any key to proceed with loading the task file.",
-                                                    "BLACK", "LIGHTWHITE_EX"))
+                                                    "Please press any key to proceed with loading the task file."))
         load_tasks()
 
 
