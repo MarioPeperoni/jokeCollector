@@ -3,22 +3,27 @@ import joke_importer
 
 jokes = []
 player_progress = []
-task_mode = ""
 task_rows = []
+tasks_mode = ""
+tasks_done = 0
+tasks_done_current = 0
 
 
 def create_save_file():
     with open('progress.joke', 'w') as file:
         for i in range(0, len(jokes)):
             file.write("Locked\n")
+        file.write("0")
 
 
 def load_save_file():
     try:
         with open('progress.joke', 'r') as file:
             lines = file.readlines()
-            for line in lines:
-                player_progress.append(line.strip())
+            for lineIndex in range(0, len(lines) - 2):
+                player_progress.append(lines[lineIndex].strip())
+            global tasks_done
+            tasks_done = int(lines[len(lines) - 1])
             print("Save file loaded.")
     except FileNotFoundError:
         print("Save file not found. Creating new one...")
@@ -30,6 +35,7 @@ def save_save_file():
     with open('progress.joke', 'w') as file:
         for player_state in player_progress:
             file.write(player_state + "\n")
+        file.write(str(tasks_done))
 
 
 def load_jokes():
@@ -56,7 +62,8 @@ def load_tasks():
     try:
         with open('tasks.joke', 'r') as file:
             lines = file.readlines()
-            lines[0] = task_mode
+            global tasks_mode
+            tasks_mode = lines[0].strip()
             for line in lines:
                 task_rows.append(line.strip())
 

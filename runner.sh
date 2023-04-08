@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Change directory to the directory where the script is located
+# shellcheck disable=SC2164
+cd "$(dirname "$0")"
+
 # Check the operating system
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo "Detected macOS"
