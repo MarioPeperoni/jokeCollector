@@ -2,8 +2,7 @@ import random
 import os
 from colorama import Back, Fore, Style
 
-import collection_screen
-import file_handle
+import collection_screen, file_handle
 
 current_joke_index = 0
 
@@ -50,8 +49,10 @@ def format_colored_text(text, fr="BLACK", bg="LIGHTWHITE_EX"):
 
 def unlock_joke(index):
     os.system('cls' if os.name == 'nt' else 'clear')
-    print("Joke #" + str(index) + " unlocked!\n" + show_joke(index))
-    file_handle.player_progress[index - 1] = "Unlocked"
+    print(format_colored_text(str("Joke #" + str(index + 1) + " unlocked!"), "GREEN", ""))
+    print(show_joke(index))
+    file_handle.player_progress[index] = "Unlocked"
+    collection_screen.current_session_unlocked_jokes.append(int(index + 1))
     file_handle.tasks_done += 1
     file_handle.tasks_done_current += 1
     file_handle.save_save_file()

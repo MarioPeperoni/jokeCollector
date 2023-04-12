@@ -60,7 +60,7 @@ def load_jokes():
 
 def load_tasks():
     try:
-        with open('tasks.joke', 'r') as file:
+        with open('../tasks.joke', 'r') as file:
             lines = file.readlines()
             global tasks_mode
             tasks_mode = lines[0].strip()
@@ -76,7 +76,7 @@ def load_tasks():
 
 
 def create_template_tasks():
-    with open('tasks.joke', 'w') as file:
+    with open('../tasks.joke', 'w') as file:
         file.write("@random\n")
         file.write("This task generates number from 0 to 1000: !0-1000\n")
         file.write("To randomize numbers write ex mark and then separate numbers with '-'\n")
