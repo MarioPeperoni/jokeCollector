@@ -24,7 +24,7 @@ fi
 
 # Set the repository URL and the local download directory
 repo_url=https://github.com/MarioPeperoni/jokeCollector.git
-download_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+download_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Get the latest commit hash from the repository
 latest_commit=$(git ls-remote $repo_url HEAD | cut -f 1)

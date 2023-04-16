@@ -63,6 +63,7 @@ def program():
     run_loop = True
     while run_loop:
         os.system('cls' if os.name == 'nt' else 'clear')
+        print("Joke Collector V. 4.16")
         randomize_index()
         pick_task()
         print("Tasks completed this session: " + format_colored_text(str(file_handle.tasks_done_current), "GREEN", ""))

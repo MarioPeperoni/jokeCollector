@@ -25,7 +25,7 @@ if %ERRORLEVEL% NEQ 0 (
 
 rem Set the repository URL and the local download directory
 set "repo_url=https://github.com/MarioPeperoni/jokeCollector"
-for %%I in ("%~dp0..\") do set "download_dir=%%~fI"
+set local_dir=%~dp0
 
 rem Get the latest commit hash from the repository
 for /f "tokens=1" %%c in ('git ls-remote %repo_url% HEAD ^| cut -f 1') do set "latest_commit=%%c"
