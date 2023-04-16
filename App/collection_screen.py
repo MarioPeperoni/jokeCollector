@@ -45,7 +45,7 @@ def show_collection(cursor):
 def collection_list_view(page):
     os.system('cls' if os.name == 'nt' else 'clear')
 
-    page_entry = 0  # Current entry on page
+    page_entry = 1  # Current entry on page
 
     for index, state in enumerate(file_handle.player_progress):
 
@@ -61,7 +61,7 @@ def collection_list_view(page):
                     joke = " ".join(joke_lines[1].strip().split(' ')[:20])
                 else:
                     joke = " ".join(first_line.split(' ')[:20])
-                if ((20 * page) + index) in current_session_unlocked_jokes:
+                if ((20 * page) + index + 1) in current_session_unlocked_jokes:
                     print(jokeCollectorMain.format_colored_text(
                         f"#{(20 * page) + index + 1} {joke}...", "GREEN", ""))
                 else:
