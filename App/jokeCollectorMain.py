@@ -1,8 +1,10 @@
-import random
 import os
+import random
+
 from colorama import Back, Fore, Style
 
-import collection_screen, file_handle
+import collection_screen
+import file_handle
 
 current_joke_index = 0
 
@@ -63,7 +65,7 @@ def program():
     run_loop = True
     while run_loop:
         os.system('cls' if os.name == 'nt' else 'clear')
-        print("Joke Collector V. 4.16")
+        print("Joke Collector V. 4.26")
         randomize_index()
         pick_task()
         print("Tasks completed this session: " + format_colored_text(str(file_handle.tasks_done_current), "GREEN", ""))

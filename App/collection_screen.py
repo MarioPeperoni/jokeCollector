@@ -7,39 +7,43 @@ current_session_unlocked_jokes = []
 
 
 def show_collection(cursor):
-    os.system('cls' if os.name == 'nt' else 'clear')
-    # Check if joke has been unlocked this session
-    if (cursor + 1) in current_session_unlocked_jokes:
-        print(jokeCollectorMain.format_colored_text(str("#" + str(cursor + 1)), "GREEN", ""))
-    else:
-        print("#" + str(cursor + 1))
-    if file_handle.player_progress[cursor] == "Unlocked":
-        print(jokeCollectorMain.show_joke(cursor))
-    else:
-        print("??????? ???? ?????? ?? ???????? ??? ???????\n"
-              "??????? ??? ??????? ???? ?????? ???? ??????\n"
-              "??????????? ?????? ?????? ???????? ????????\n"
-              "?? ???????? ??? ???????? ??? ???????? ?????\n")
+    try:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        # Check if joke has been unlocked this session
+        if (cursor + 1) in current_session_unlocked_jokes:
+            print(jokeCollectorMain.format_colored_text(str("#" + str(cursor + 1)), "GREEN", ""))
+        else:
+            print("#" + str(cursor + 1))
+        if file_handle.player_progress[cursor] == "Unlocked":
+            print(jokeCollectorMain.show_joke(cursor))
+        else:
+            print("??????? ???? ?????? ?? ???????? ??? ???????\n"
+                  "??????? ??? ??????? ???? ?????? ???? ??????\n"
+                  "??????????? ?????? ?????? ???????? ????????\n"
+                  "?? ???????? ??? ???????? ??? ???????? ?????\n")
 
-    print("Unlocked " + str(file_handle.player_progress.count("Unlocked")) + " of " + str(len(file_handle.jokes)))
-    print(jokeCollectorMain.format_colored_text("L") + " - for list view")
-    print(jokeCollectorMain.format_colored_text("A-D") + " - for navigation")
+        print("Unlocked " + str(file_handle.player_progress.count("Unlocked")) + " of " + str(len(file_handle.jokes)))
+        print(jokeCollectorMain.format_colored_text("L") + " - for list view")
+        print(jokeCollectorMain.format_colored_text("A-D") + " - for navigation")
 
-    user_input = input("<< " + jokeCollectorMain.format_colored_text(str(cursor + 1)) + " >>")
-    if user_input.upper() == 'D':
-        if (cursor + 1) >= 408:
-            cursor = -1
-        show_collection(cursor + 1)
-    if user_input.upper() == 'A':
-        if (cursor - 1) < 0:
-            cursor = 408
-        show_collection(cursor - 1)
-    if user_input.upper() == 'L':
-        collection_list_view(0)
-    if user_input.upper() == 'B':
-        return None
-    if user_input.isdigit():
-        show_collection(int(user_input) - 1)
+        user_input = input("<< " + jokeCollectorMain.format_colored_text(str(cursor + 1)) + " >>")
+        if user_input.upper() == 'D':
+            if (cursor + 1) >= 408:
+                cursor = -1
+            show_collection(cursor + 1)
+        if user_input.upper() == 'A':
+            if (cursor - 1) < 0:
+                cursor = 408
+            show_collection(cursor - 1)
+        if user_input.upper() == 'L':
+            collection_list_view(0)
+        if user_input.upper() == 'B':
+            return None
+        if user_input.isdigit():
+            show_collection(int(user_input) - 1)
+    except IndexError:
+        input("There is no joke #" + str(cursor + 1))
+        show_collection(0)
 
 
 def collection_list_view(page):

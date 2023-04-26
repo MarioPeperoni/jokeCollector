@@ -20,11 +20,12 @@ def load_save_file():
     try:
         with open('progress.joke', 'r') as file:
             lines = file.readlines()
-            for lineIndex in range(0, len(lines) - 2):
+            for lineIndex in range(0, len(lines) - 1):
                 player_progress.append(lines[lineIndex].strip())
             global tasks_done
             tasks_done = int(lines[len(lines) - 1])
             print("Save file loaded.")
+            check_save_file()
     except FileNotFoundError:
         print("Save file not found. Creating new one...")
         create_save_file()
@@ -36,6 +37,17 @@ def save_save_file():
         for player_state in player_progress:
             file.write(player_state + "\n")
         file.write(str(tasks_done))
+
+
+def check_save_file():
+    """
+    Returns true if save file passes check with jokes database
+    """
+    if len(jokes) == len(player_progress):
+        return 1
+    else:
+        input("Your save file is corrupted. The program may not work properly")
+        return 0
 
 
 def load_jokes():

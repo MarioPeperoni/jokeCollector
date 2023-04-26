@@ -24,7 +24,7 @@ fi
 
 # Set the repository URL and the local download directory
 repo_url=https://github.com/MarioPeperoni/jokeCollector.git
-download_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+download_dir="$(cd ".." && pwd)"
 
 # Get the latest commit hash from the repository
 latest_commit=$(git ls-remote $repo_url HEAD | cut -f 1)
@@ -55,7 +55,7 @@ if [ "$answer" = "y" ]; then
 
     # Copy the new version files to the destination directory
     # shellcheck disable=SC2154
-    cp -r "$download_dir"/new_version/* "$destination_dir"
+    cp -r "$download_dir"/new_version/* "$download_dir"
 
     # Clean up the temporary download directory
     rm -rf "$download_dir"/new_version
